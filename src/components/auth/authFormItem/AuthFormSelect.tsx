@@ -1,35 +1,48 @@
 import {
   Select,
   SelectContent,
+  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import AuthFormItem from "./AuthFormItem";
 import { FormField } from "@/components/ui/form";
 import { FieldValues, Control, Path } from "react-hook-form";
+import { Role } from "@/types/auth.type";
 
 interface Props<T extends FieldValues> {
   control: Control<T>;
   name: Path<T>;
+  selectItems: Role[];
+  placeholder: string;
+  title: string;
 }
 
 const AuthFormSelect = <T extends Record<string, any>>({
-  children,
   control,
   name,
-}: PropsWithChildren<Props<T>>) => {
+  selectItems,
+  placeholder,
+  title,
+}: Props<T>) => {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <AuthFormItem>
+        <AuthFormItem title={title}>
           <Select>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" {...field} />
+              <SelectValue placeholder={placeholder} {...field} />
             </SelectTrigger>
-            <SelectContent>{children}</SelectContent>
+            <SelectContent>
+              {selectItems.map((item) => (
+                <SelectItem key={item} value={item}>
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
         </AuthFormItem>
       )}

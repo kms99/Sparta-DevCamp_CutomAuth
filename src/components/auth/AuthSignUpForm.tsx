@@ -8,8 +8,12 @@ import { formSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";
 import AuthFormInput from "./authFormItem/AuthFormInput";
 import AuthFormSelect from "./authFormItem/AuthFormSelect";
-import { SelectItem } from "../ui/select";
 import { UseFormReturn } from "react-hook-form";
+import {
+  SIGN_UP_FIRST_STEP_ITEMS,
+  SIGN_UP_SECOND_STEP_ITEMS,
+} from "@/constants/auth";
+import { FormItem } from "@/types/auth.type";
 
 const AuthSignUpForm = () => {
   const form: UseFormReturn<z.infer<typeof formSchema>> = useForm<
@@ -32,33 +36,47 @@ const AuthSignUpForm = () => {
 
   return (
     <AuthForm<z.infer<typeof formSchema>> form={form} submitHandler={onSubmit}>
-      <AuthFormInput
-        control={form.control}
-        name="nickname"
-        type="text"
-        placeholder="홍길동"
-      />
-      <AuthFormInput
-        control={form.control}
-        name="email"
-        type="email"
-        placeholder="user@example.com"
-      />
-      <AuthFormInput
-        control={form.control}
-        name="phone"
-        type="text"
-        placeholder="01000000000"
-      />
+      {SIGN_UP_FIRST_STEP_ITEMS.map((item) => {
+        if (item.itemType === FormItem.INPUT) {
+          return (
+            <AuthFormInput<z.infer<typeof formSchema>>
+              title={item.title}
+              key={item.name}
+              control={form.control}
+              name={item.name}
+              type={item.type!}
+              placeholder={item.placeholder}
+            />
+          );
+        }
+        if (item.itemType === FormItem.SELECT) {
+          return (
+            <AuthFormSelect<z.infer<typeof formSchema>>
+              title={item.title}
+              key={item.name}
+              control={form.control}
+              name={item.name}
+              selectItems={item.selectItems!}
+              placeholder={item.placeholder!}
+            />
+          );
+        }
+      })}
 
-      <AuthFormSelect control={form.control} name="role">
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
-      </AuthFormSelect>
-
-      <AuthFormInput control={form.control} name="password" type="text" />
-      <AuthFormInput control={form.control} name="check_password" type="text" />
+      {SIGN_UP_SECOND_STEP_ITEMS.map((item) => {
+        if (item.itemType === FormItem.INPUT) {
+          return (
+            <AuthFormInput<z.infer<typeof formSchema>>
+              title={item.title}
+              key={item.name}
+              control={form.control}
+              name={item.name}
+              type={item.type!}
+              placeholder={item.placeholder}
+            />
+          );
+        }
+      })}
     </AuthForm>
   );
 };

@@ -1,10 +1,13 @@
 import React, { PropsWithChildren } from "react";
 import { FormControl, FormItem, FormLabel, FormMessage } from "../../ui/form";
 
-const AuthFormItem = ({ children }: PropsWithChildren) => {
+interface Props {
+  title: string;
+}
+const AuthFormItem = ({ children, title }: PropsWithChildren<Props>) => {
   return (
     <FormItem>
-      <FormLabel>Username</FormLabel>
+      <FormLabel>{title}</FormLabel>
       <FormControl>{children}</FormControl>
       <FormMessage />
     </FormItem>
