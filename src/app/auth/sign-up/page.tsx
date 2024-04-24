@@ -1,5 +1,6 @@
 import AuthContainer from "@/components/auth/AuthContainer";
 import AuthFooterLink from "@/components/auth/AuthFooterLink";
+import AuthSignUpForm from "@/components/auth/AuthSignUpForm";
 import AuthWrapper from "@/components/auth/AuthWrapper";
 import React from "react";
 
@@ -11,6 +12,7 @@ const SignUp = () => {
         cardDescription="회원가입하세요"
         className="w-[25rem] relative"
       >
+        <AuthSignUpForm />
         <AuthFooterLink
           descriptionText="이미 회원이신가요?"
           href="/auth/sign-in"
