@@ -6,7 +6,7 @@ interface Props {
 }
 const AuthFormItem = ({ children, title }: PropsWithChildren<Props>) => {
   return (
-    <FormItem>
+    <FormItem className="px-2">
       <FormLabel>{title}</FormLabel>
       <FormControl>{children}</FormControl>
       <FormMessage />

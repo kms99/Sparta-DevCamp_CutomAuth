@@ -17,6 +17,7 @@ interface Props<T extends FieldValues> {
   selectItems: Role[];
   placeholder: string;
   title: string;
+  tabAble?: boolean;
 }
 
 const AuthFormSelect = <T extends Record<string, any>>({
@@ -25,26 +26,30 @@ const AuthFormSelect = <T extends Record<string, any>>({
   selectItems,
   placeholder,
   title,
+  tabAble,
 }: Props<T>) => {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <AuthFormItem title={title}>
-          <Select>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <AuthFormItem title={title}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder={placeholder} {...field} />
+              <SelectValue
+                placeholder={placeholder}
+                tabIndex={tabAble ? 0 : -1}
+              />
             </SelectTrigger>
-            <SelectContent>
-              {selectItems.map((item) => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </AuthFormItem>
+          </AuthFormItem>
+          <SelectContent>
+            {selectItems.map((item) => (
+              <SelectItem key={item} value={item}>
+                {item}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       )}
     />
   );

@@ -13,12 +13,12 @@ const AuthFooterLink = ({
   ...props
 }: PropsWithChildren<Props>) => {
   return (
-    <span className={`flex gap-4 text-base ${styleClass}`}>
+    <div className={`flex gap-4 text-base pt-2 ${styleClass}`}>
       <span>{descriptionText}</span>
       <Link {...props} className="font-bold">
         {children}
       </Link>
-    </span>
+    </div>
   );
 };
 

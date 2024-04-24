@@ -41,13 +41,13 @@ export const SIGN_UP_SECOND_STEP_ITEMS: FormItemType<
   {
     title: "비밀번호",
     itemType: FormItem.INPUT,
-    type: "text",
+    type: "password",
     name: "password",
   },
   {
     title: "비밀번호 확인",
     itemType: FormItem.INPUT,
-    type: "text",
+    type: "password",
     name: "check_password",
   },
 ];

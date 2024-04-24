@@ -10,6 +10,7 @@ interface Props<T extends FieldValues> {
   placeholder?: string;
   type: InputType;
   title: string;
+  tabAble?: boolean;
 }
 const AuthFormInput = <T extends Record<string, any>>({
   placeholder,
@@ -17,6 +18,7 @@ const AuthFormInput = <T extends Record<string, any>>({
   control,
   name,
   title,
+  tabAble,
 }: Props<T>) => {
   return (
     <FormField
@@ -24,7 +26,12 @@ const AuthFormInput = <T extends Record<string, any>>({
       name={name}
       render={({ field }) => (
         <AuthFormItem title={title}>
-          <Input placeholder={placeholder} type={type} {...field} />
+          <Input
+            placeholder={placeholder}
+            type={type}
+            {...field}
+            tabIndex={tabAble ? 0 : -1}
+          />
         </AuthFormItem>
       )}
     />
