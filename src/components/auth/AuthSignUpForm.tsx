@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import AuthForm from "./AuthForm";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema } from "@/lib/validation";
+import { signUpFormSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";
 import AuthFormInput from "./authFormItem/AuthFormInput";
 import AuthFormSelect from "./authFormItem/AuthFormSelect";
@@ -22,10 +22,10 @@ import { Button } from "../ui/button";
 const AuthSignUpForm = () => {
   const [step, setStep] = useState<number>(0);
 
-  const form: UseFormReturn<z.infer<typeof formSchema>> = useForm<
-    z.infer<typeof formSchema>
+  const form: UseFormReturn<z.infer<typeof signUpFormSchema>> = useForm<
+    z.infer<typeof signUpFormSchema>
   >({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signUpFormSchema),
     defaultValues: {
       nickname: "",
       email: "",
@@ -36,7 +36,7 @@ const AuthSignUpForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof signUpFormSchema>) => {
     console.log(values);
   };
 
@@ -65,7 +65,7 @@ const AuthSignUpForm = () => {
   };
 
   return (
-    <AuthForm<z.infer<typeof formSchema>>
+    <AuthForm<z.infer<typeof signUpFormSchema>>
       form={form}
       submitHandler={onSubmit}
       keyDownHandler={handleKeyDownBubble}
@@ -79,7 +79,7 @@ const AuthSignUpForm = () => {
           {SIGN_UP_FIRST_STEP_ITEMS.map((item) => {
             if (item.itemType === FormItem.INPUT) {
               return (
-                <AuthFormInput<z.infer<typeof formSchema>>
+                <AuthFormInput<z.infer<typeof signUpFormSchema>>
                   title={item.title}
                   key={item.name}
                   control={form.control}
@@ -92,7 +92,7 @@ const AuthSignUpForm = () => {
             }
             if (item.itemType === FormItem.SELECT) {
               return (
-                <AuthFormSelect<z.infer<typeof formSchema>>
+                <AuthFormSelect<z.infer<typeof signUpFormSchema>>
                   title={item.title}
                   key={item.name}
                   control={form.control}
@@ -115,7 +115,7 @@ const AuthSignUpForm = () => {
           {SIGN_UP_SECOND_STEP_ITEMS.map((item) => {
             if (item.itemType === FormItem.INPUT) {
               return (
-                <AuthFormInput<z.infer<typeof formSchema>>
+                <AuthFormInput<z.infer<typeof signUpFormSchema>>
                   title={item.title}
                   key={item.name}
                   control={form.control}
@@ -130,20 +130,24 @@ const AuthSignUpForm = () => {
         </motion.div>
       </div>
       <AuthFormButtonWrapper>
+        <Button type="submit" className={step ? "block" : "hidden"}>
+          회원가입 완료
+        </Button>
         {!step ? (
           <Button type="button" onClick={() => handleNextStep(1)}>
             다음으로
           </Button>
         ) : (
           <>
-            <Button type="button" onClick={() => handleNextStep(0)}>
+            <Button
+              type="button"
+              onClick={() => handleNextStep(0)}
+              variant="ghost"
+            >
               이전으로
             </Button>
           </>
         )}
-        <Button type="submit" className={step ? "block" : "hidden"}>
-          제출
-        </Button>
       </AuthFormButtonWrapper>
     </AuthForm>
   );

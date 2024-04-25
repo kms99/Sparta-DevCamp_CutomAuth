@@ -35,7 +35,7 @@ const AuthFormSelect = <T extends Record<string, any>>({
       render={({ field }) => (
         <Select onValueChange={field.onChange} defaultValue={field.value}>
           <AuthFormItem title={title}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-full">
               <SelectValue
                 placeholder={placeholder}
                 tabIndex={tabAble ? 0 : -1}

@@ -1,9 +1,9 @@
-import { formSchema } from "@/lib/validation";
+import { signInFormSchema, signUpFormSchema } from "@/lib/validation";
 import { FormItem, FormItemType, Role } from "@/types/auth.type";
 import { z } from "zod";
 
 export const SIGN_UP_FIRST_STEP_ITEMS: FormItemType<
-  z.infer<typeof formSchema>
+  z.infer<typeof signUpFormSchema>
 >[] = [
   {
     title: "닉네임",
@@ -36,7 +36,7 @@ export const SIGN_UP_FIRST_STEP_ITEMS: FormItemType<
 ];
 
 export const SIGN_UP_SECOND_STEP_ITEMS: FormItemType<
-  z.infer<typeof formSchema>
+  z.infer<typeof signUpFormSchema>
 >[] = [
   {
     title: "비밀번호",
@@ -49,5 +49,20 @@ export const SIGN_UP_SECOND_STEP_ITEMS: FormItemType<
     itemType: FormItem.INPUT,
     type: "password",
     name: "check_password",
+  },
+];
+
+export const SIGN_IN_ITEMS: FormItemType<z.infer<typeof signInFormSchema>>[] = [
+  {
+    title: "아이디",
+    itemType: FormItem.INPUT,
+    type: "email",
+    name: "email",
+  },
+  {
+    title: "비밀번호",
+    itemType: FormItem.INPUT,
+    type: "password",
+    name: "password",
   },
 ];
