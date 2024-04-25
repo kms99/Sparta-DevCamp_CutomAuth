@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const formSchema = z
+export const signUpFormSchema = z
   .object({
     nickname: z.string({ message: "이름은 2글자 이상이여야 합니다." }).min(2, {
       message: "이름은 두 글자 이상이여야 합니다.",
@@ -40,3 +40,17 @@ export const formSchema = z
     message: "비밀번호가 다릅니다.",
     path: ["check_password"],
   });
+
+export const signInFormSchema = z.object({
+  email: z.string({ message: "올바른 이메일을 입력해주세요." }).email({
+    message: "올바른 이메일을 입력해주세요.",
+  }),
+  password: z
+    .string({ message: "비밀번호는 최소 6자리 이상이어야 합니다." })
+    .min(6, {
+      message: "비밀번호는 최소 6자리 이상이어야 합니다.",
+    })
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/, {
+      message: "비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.",
+    }),
+});
