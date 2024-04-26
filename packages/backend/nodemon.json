@@ -1,0 +1,4 @@
+{
+  "exec": "ts-node --files svr.ts",
+  "ext": ".ts,.js"
+}
