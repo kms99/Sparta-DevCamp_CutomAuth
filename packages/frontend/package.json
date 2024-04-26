@@ -1,5 +1,5 @@
 {
-  "name": "auth-project2",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,29 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
-  },
-  "workspaces": {
-    "nohoist": [
-      "tailwindcss",
-      "postcss",
-      "eslint-config-next",
-      "zod",
-      "tailwindcss-animate",
-      "tailwind-merge",
-      "react-hook-form",
-      "react-dom",
-      "react",
-      "next",
-      "lucide-react",
-      "framer-motion",
-      "clsx",
-      "class-variance-authority",
-      "@radix-ui/**",
-      "@hookform/**",
-      "@types/node",
-      "@types/react",
-      "@types/react-dom"
-    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -53,8 +30,10 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
     "eslint-config-next": "14.2.2",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
