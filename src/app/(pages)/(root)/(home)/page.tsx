@@ -1,5 +1,11 @@
+import UserProfileContainer from "@/components/profile/UserProfileContainer";
+
 const Home = () => {
-  return <div>auth 구현</div>;
+  return (
+    <div className="h-full flex justify-center items-center">
+      <UserProfileContainer />
+    </div>
+  );
 };
 
 export default Home;
