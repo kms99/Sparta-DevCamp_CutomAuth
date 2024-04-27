@@ -5,6 +5,8 @@ const serveStatic = require("serve-static");
 const dbconfig = require("./config/dbconfig.json");
 const cors = require("cors");
 
+const now = new Date();
+
 // 데이터베이스 연결 구성
 const pool = mysql.createPool({
   connectionLimit: 10, // 연결 풀에서 동시에 유지할 수 있는 최대 연결 수
@@ -34,7 +36,9 @@ app.post("/process/user/sign-up", (req, res) => {
       if (conn) {
         conn.release();
       }
-      console.log(`${Date.now()} / [서버 오류] DB와 연결할 수 없습니다.`);
+      console.log(
+        `${now.toUTCString()} / [서버 오류] DB와 연결할 수 없습니다.`
+      );
       res
         .status(500)
         .json({ message: "서버 오류가 발생하였습니다. 관리자에 문의하세요" });
@@ -51,7 +55,7 @@ app.post("/process/user/sign-up", (req, res) => {
 
         if (err) {
           console.log(
-            `${Date.now()} / [DB 오류] DATABASE query가 잘못되었습니다.`
+            `${now.toUTCString()} / [DB 오류] DATABASE query가 잘못되었습니다.`
           );
           res
             .status(500)
@@ -60,7 +64,9 @@ app.post("/process/user/sign-up", (req, res) => {
         }
 
         if (result) {
-          console.log(`${Date.now()} / [회원가입 성공] ${nickname}(${email})`);
+          console.log(
+            `${now.toUTCString()} / [회원가입 성공] ${nickname}(${email})`
+          );
           res.status(200).json({
             message: "회원가입 성공",
             user: { nickname, email, role, phone },
@@ -68,7 +74,7 @@ app.post("/process/user/sign-up", (req, res) => {
           return;
         } else {
           console.log(
-            `${Date.now()} / [회원가입 실패] (input: ${email}) 이미 생성된 계정이 있습니다.`
+            `${now.toUTCString()} / [회원가입 실패] (input: ${email}) 이미 생성된 계정이 있습니다.`
           );
           res
             .status(404)
@@ -93,7 +99,9 @@ app.post("/process/user/sign-in", (req, res) => {
       if (conn) {
         conn.release();
       }
-      console.log(`${Date.now()} / [서버 오류] DB와 연결할 수 없습니다.`);
+      console.log(
+        `${now.toUTCString()} / [서버 오류] DB와 연결할 수 없습니다.`
+      );
       res
         .status(500)
         .json({ message: "서버 오류가 발생하였습니다. 관리자에 문의하세요" });
@@ -110,7 +118,7 @@ app.post("/process/user/sign-in", (req, res) => {
         conn.release();
         if (err) {
           console.log(
-            `${Date.now()} / [DB 오류] DATABASE query가 잘못되었습니다.`
+            `${now.toUTCString()} / [DB 오류] DATABASE query가 잘못되었습니다.`
           );
           res
             .status(500)
@@ -120,13 +128,13 @@ app.post("/process/user/sign-in", (req, res) => {
 
         if (rows.length > 0) {
           console.log(
-            `${Date.now()} / [로그인 성공] ${rows[0].nickname}(${rows[0].email})`
+            `${now.toUTCString()} / [로그인 성공] ${rows[0].nickname}(${rows[0].email})`
           );
           res.status(200).json({ message: "로그인 성공", user: rows[0] });
           return;
         } else {
           console.log(
-            `${Date.now()} / [로그인 실패] (input: ${email}) 입력한 정보와 일치하는 정보가 없습니다.`
+            `${now.toUTCString()} / [로그인 실패] (input: ${email}) 입력한 정보와 일치하는 정보가 없습니다.`
           );
           res
             .status(404)

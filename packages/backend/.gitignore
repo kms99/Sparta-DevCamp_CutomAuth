@@ -1,0 +1,25 @@
+# Dependencies
+/node_modules
+/packages/*/node_modules
+
+# Testing
+/coverage
+src/config/dbconfig.json
+
+# Next.js
+/packages/*/next
+
+# Build
+/packages/*/build
+
+# Vercel
+/packages/*/.vercel
+
+# TypeScript
+/packages/*/*.tsbuildinfo
+/packages/*/next-env.d.ts
+# IDE
+.vscode
+
+# Environment files
+/packages/*/.env*
