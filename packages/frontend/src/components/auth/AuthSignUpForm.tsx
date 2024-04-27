@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import AuthFormButtonWrapper from "./authFormItem/AuthFormButtonWrapper";
 import { Button } from "../ui/button";
+import axios from "axios";
 
 const AuthSignUpForm = () => {
   const [step, setStep] = useState<number>(0);
@@ -36,8 +37,14 @@ const AuthSignUpForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof signUpFormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
+    const response = await axios.post(process.env.NEXT_PUBLIC_SIGN_UP!, {
+      nickname: values.nickname,
+      email: values.email,
+      phone: values.phone,
+      role: values.role,
+      password: values.password,
+    });
   };
 
   const handleNextStep = (nextStep: number) => {

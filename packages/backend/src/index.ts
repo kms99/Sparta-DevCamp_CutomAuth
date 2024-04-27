@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const path = require("path");
 const serveStatic = require("serve-static");
-const dbconfig = require("./config/dbconfig.json");
+const dbconfig = require("../config/dbconfig.json");
 const cors = require("cors");
 
 const now = new Date();

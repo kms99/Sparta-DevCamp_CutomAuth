@@ -4,8 +4,6 @@
 
 # Testing
 /coverage
-src/config/dbconfig.json
-
 # Next.js
 /packages/*/next
 

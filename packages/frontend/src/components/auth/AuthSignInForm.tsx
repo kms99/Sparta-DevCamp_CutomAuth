@@ -11,6 +11,7 @@ import { UseFormReturn } from "react-hook-form";
 import { SIGN_IN_ITEMS } from "@/constants/auth";
 import AuthFormButtonWrapper from "./authFormItem/AuthFormButtonWrapper";
 import { Button } from "../ui/button";
+import axios from "axios";
 
 const AuthSignInForm = () => {
   const form: UseFormReturn<z.infer<typeof signInFormSchema>> = useForm<
@@ -23,8 +24,14 @@ const AuthSignInForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof signInFormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof signInFormSchema>) => {
+    // 비밀번호 보안을 위한 post 조치
+    const response = await axios.post(process.env.NEXT_PUBLIC_SIGN_IN!, {
+      email: values.email,
+      password: values.password,
+    });
+
+    console.log(response);
   };
 
   return (
